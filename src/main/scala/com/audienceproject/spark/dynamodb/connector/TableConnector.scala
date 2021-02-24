@@ -43,6 +43,8 @@ private[dynamodb] class TableConnector(tableName: String, parallelism: Int, para
 
     override val filterPushdownEnabled: Boolean = filterPushdown
 
+    override val daxEndpoint: String = parameters.getOrElse("daxEndpoint", "").trim
+
     override val (keySchema, readLimit, writeLimit, itemLimit, totalSegments) = {
         val table = getDynamoDB(region, roleArn, providerClassName).getTable(tableName)
         val desc = table.describe()
