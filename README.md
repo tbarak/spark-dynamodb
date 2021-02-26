@@ -92,7 +92,9 @@ The following parameters can be set as options on the Spark reader object before
 
 - `readPartitions` number of partitions to split the initial RDD when loading the data into Spark. Defaults to the size of the DynamoDB table divided into chunks of `maxPartitionBytes`
 - `maxPartitionBytes` the maximum size of a single input partition. Default 128 MB
-- `defaultParallelism` the number of input partitions that can be read from DynamoDB simultaneously. Defaults to `sparkContext.defaultParallelism`
+- `defaultParallelism` the number of input partitions that can be read from or written to DynamoDB simultaneously.
+Read/write throughput will be limited by dividing it by this number. Set this to the number of CPU cores in your
+Spark job. Defaults to the value of `SparkContext#defaultParallelism`.
 - `targetCapacity` fraction of provisioned read capacity on the table (or index) to consume for reading, enforced by
 a rate limiter. Default 1 (i.e. 100% capacity).
 - `stronglyConsistentReads` whether or not to use strongly consistent reads. Default false.
