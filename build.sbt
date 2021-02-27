@@ -2,7 +2,7 @@ organization := "com.audienceproject"
 
 name := "spark-dynamodb"
 
-version := "1.1.3-SNAPSHOT"
+version := "1.1.3-expedia"
 
 description := "Plug-and-play implementation of an Apache Spark custom data source for AWS DynamoDB."
 
@@ -106,18 +106,23 @@ Test / resourceGenerators += Def.task {
         .toSeq
 }.taskValue
 
+Global / useGpgPinentry := true
+
 /**
   * Maven specific settings for publishing to Maven central.
   */
 publishMavenStyle := true
 publishArtifact in Test := false
 pomIncludeRepository := { _ => false }
-publishTo := {
-    val nexus = "https://oss.sonatype.org/"
-    if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
-    else Some("releases" at nexus + "service/local/staging/deploy/maven2")
-}
-pomExtra := <url>https://github.com/audienceproject/spark-dynamodb</url>
+
+credentials += Credentials(Path.userHome / ".sbt" / ".credentials")
+publishTo := Some("Artylab" at "https://artylab.expedia.biz/bexg-maven-release-local")
+//publishTo := {
+//    val nexus = "https://oss.sonatype.org/"
+//    if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
+//    else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+//}
+pomExtra := <url>https://github.com/rehevkor5/spark-dynamodb</url>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -125,9 +130,10 @@ pomExtra := <url>https://github.com/audienceproject/spark-dynamodb</url>
         </license>
     </licenses>
     <scm>
-        <url>git@github.com:audienceproject/spark-dynamodb.git</url>
-        <connection>scm:git:git//github.com/audienceproject/spark-dynamodb.git</connection>
-        <developerConnection>scm:git:ssh://github.com:audienceproject/spark-dynamodb.git</developerConnection>
+        <url>git@github.com:rehevkor5/spark-dynamodb.git</url>
+        <connection>scm:git:git//github.com/rehevkor5/spark-dynamodb.git</connection>
+        <developerConnection>scm:git:ssh://github.com:rehevkor5/spark-dynamodb.git</developerConnection>
+        <tag>expedia</tag>
     </scm>
     <developers>
         <developer>
