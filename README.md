@@ -111,7 +111,9 @@ by a rate limiter. Default 1 (i.e. 100% capacity).
 - `update` if true, items will be written using UpdateItem on keys rather than BatchWriteItem. Default false.
 - `delete` if true, items will be deleted using BatchWriteItem. Default false.
 - `throughput` the desired write throughput to use. It overwrites any calculation used by the package. It is intended to be used with tables that are on-demand. Defaults to 100 for on-demand.
-- `inferSchema` if false will not automatically infer schema - this is useful when writing to a table with many columns
+- `inferSchema` Requires permission to use "Scan" on the table. If no items are present in the table, the inferred
+schema will be empty. If false, will not automatically infer schema - this is useful when writing to a table with
+many columns. Default true.
 
 ## System Properties
 The following Java system properties are available for configuration.
