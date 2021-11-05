@@ -76,6 +76,6 @@ object JavaConverter {
     }
 
     def convertStringArray(array: ArrayData): Seq[String] =
-        array.toSeq[UTF8String](StringType).map(_.toString)
+        array.toSeq[UTF8String](StringType).map(s => if (s == null) null else s.toString)
 
 }
